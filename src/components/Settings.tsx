@@ -4,11 +4,10 @@ import { LayoutType, Photo } from "react-photo-album";
 import { SliderControl } from "./SliderControl.tsx";
 import { Filter } from "./Filter.tsx";
 import { SettingsContext } from "../context/useSettings.tsx";
-import photos from "../components/components.ts";
 
-export default function Settings({ children }) {
+export default function Settings({ images, children }) {
   const [layout, setLayout] = React.useState<LayoutType>("rows");
-  const [count, setCount] = React.useState(photos.length);
+  const [count, setCount] = React.useState(images.length);
   const [targetRowHeight, setTargetRowHeight] = React.useState(300);
   const [columns, setColumns] = React.useState(5);
   const [spacing, setSpacing] = React.useState(30);
@@ -27,7 +26,7 @@ export default function Settings({ children }) {
 
   const settings = React.useMemo(
     () => ({
-      photos: photos.slice(0, count),
+      photos: images.slice(0, count),
       layout,
       targetRowHeight,
       columns,
@@ -74,7 +73,7 @@ export default function Settings({ children }) {
             <SliderControl
               name="Photos"
               min={1}
-              max={photos.length}
+              max={images.length}
               value={count}
               onChange={(_, value) => setCount(value)}
             />

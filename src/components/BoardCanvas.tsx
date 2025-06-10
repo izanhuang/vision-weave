@@ -31,7 +31,7 @@ export const BoardCanvas = ({ images, theme, width, height, onRandomize }) => {
 
   return (
     <div>
-      <Settings>
+      <Settings images={images}>
         <Playground />
       </Settings>
       <div className="mt-4 flex gap-4">
