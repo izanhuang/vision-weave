@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex flex-col gap-4 p-4">
       <SidebarControls
         rssUrl={rssUrl}
         setRssUrl={setRssUrl}
@@ -33,7 +33,7 @@ export default function Home() {
         onGenerate={generateBoard}
       />
 
-      <div className="flex-1 overflow-auto p-6">
+      <div>
         <ThemeSelector
           current={themeKey}
           onChange={(theme) =>

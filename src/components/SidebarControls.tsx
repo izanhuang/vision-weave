@@ -19,10 +19,11 @@ export const SidebarControls: React.FC<Props> = ({
   setHeight,
   onGenerate,
 }) => (
-  <div className="flex flex-col gap-4 w-64 p-4 border-r border-gray-200">
+  <div className="flex flex-col self-center gap-4 p-8  border-r border-gray-200">
+    <p>If your Pinterest board is public, you can paste the RSS URL here:</p>
     <input
       type="text"
-      placeholder="Pinterest RSS URL"
+      placeholder="https://www.pinterest.com/username/boardname.rss"
       value={rssUrl}
       onChange={(e) => setRssUrl(e.target.value)}
       className="p-2 border rounded"
