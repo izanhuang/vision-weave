@@ -55,7 +55,6 @@ export async function getPinterestImages(rssUrl: string) {
         const imageSrc = await proxyImage(imageUrl[1]);
 
         return {
-          key: item.guid,
           width: imageDimensions.width,
           height: imageDimensions.height,
           src: imageSrc,

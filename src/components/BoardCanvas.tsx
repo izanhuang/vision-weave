@@ -1,32 +1,33 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import "react-photo-album/masonry.css";
 import Settings from "./Settings.tsx";
 import { Playground } from "./Playground.tsx";
 import { toPng } from "html-to-image";
+import { Photo } from "react-photo-album";
 
 interface BoardCanvasProps {
-  images: string[];
+  images: Photo[];
 }
 
 export const BoardCanvas = ({ images }: BoardCanvasProps) => {
   const boardRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = async () => {
-    if (!boardRef.current) return;
-
-    try {
-      const dataUrl = await toPng(boardRef.current, {
-        cacheBust: true,
-      });
-
-      const link = document.createElement("a");
-      link.download = "vision-board.png";
-      link.href = dataUrl;
-      link.click();
-    } catch (err) {
-      console.error("Image generation failed:", err);
+  const handleDownload = useCallback(() => {
+    if (boardRef.current === null) {
+      return;
     }
-  };
+
+    toPng(boardRef.current)
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "vision-board.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [boardRef]);
 
   return (
     <div>

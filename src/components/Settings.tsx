@@ -26,7 +26,12 @@ export default function Settings({ images, children }) {
 
   const settings = React.useMemo(
     () => ({
-      photos: images.slice(0, count),
+      photos: images.slice(0, count).map((image, index) => ({
+        key: `${image.src}-${index}`,
+        src: image.src,
+        width: image.width || 400, // Default width if not provided
+        height: image.height || 400, // Default height if not provided
+      })),
       layout,
       targetRowHeight,
       columns,

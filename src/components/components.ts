@@ -100,7 +100,7 @@ const photos = [
   const extension = matcher[4];
 
   return {
-    src: "https://i.pinimg.com/236x/c8/fe/37/c8fe37589c73975bca8312fb09cab282.jpg",
+    src: imageLink(path, width, height, width, extension),
     width,
     height,
     // srcSet: breakpoints.map((breakpoint) => ({
@@ -108,7 +108,7 @@ const photos = [
     //   width: breakpoint,
     //   height: Math.round((height / width) * breakpoint),
     // })),
-    ...rest,
+    // ...rest,
   } as Photo;
 });
 
