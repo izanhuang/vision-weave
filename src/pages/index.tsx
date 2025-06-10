@@ -9,7 +9,7 @@ import photos from "../components/components.ts";
 
 export default function Home() {
   const [rssUrl, setRssUrl] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<any[]>([]);
   const [themeKey, setThemeKey] = useState(
     "dreamy" as "dreamy" | "neutral" | "cozy"
   );
@@ -34,7 +34,12 @@ export default function Home() {
       />
 
       <div className="flex-1 overflow-auto p-6">
-        <ThemeSelector current={themeKey} onChange={setThemeKey} />
+        <ThemeSelector
+          current={themeKey}
+          onChange={(theme) =>
+            setThemeKey(theme as "dreamy" | "neutral" | "cozy")
+          }
+        />
         <BoardCanvas
           images={images}
           theme={themes[themeKey]}

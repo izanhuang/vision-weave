@@ -3,6 +3,8 @@ import React, { useRef } from "react";
 import photos from "./components.ts";
 import { MasonryPhotoAlbum } from "react-photo-album";
 import "react-photo-album/masonry.css";
+import Settings from "./Settings.tsx";
+import { Playground } from "./Playground.tsx";
 
 interface BoardCanvasProps {
   images: string[];
@@ -12,13 +14,7 @@ interface BoardCanvasProps {
   onRandomize: () => void;
 }
 
-export const BoardCanvas = ({
-  images,
-  theme,
-  width,
-  height,
-  onRandomize,
-}): BoardCanvasProps => {
+export const BoardCanvas = ({ images, theme, width, height, onRandomize }) => {
   const boardRef = useRef(null);
 
   const handleDownload = async () => {
@@ -35,30 +31,9 @@ export const BoardCanvas = ({
 
   return (
     <div>
-      <MasonryPhotoAlbum photos={images} />
-      <div
-        ref={boardRef}
-        className={`relative flex flex-wrap justify-center gap-2 p-4 ${theme.bg} ${theme.font}`}
-        style={{ width: "auto", height: "100%" }}
-      >
-        {/* {images.map((img, i) => (
-          <div
-            key={i}
-            className={`relative rounded-xl ${theme.border}`}
-            style={{
-              transform: `rotate(${Math.random() * 6 - 3}deg)`,
-              width: "auto",
-              height: "100%",
-            }}
-          >
-            <img
-              src={img}
-              alt=""
-              className="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-        ))} */}
-      </div>
+      <Settings>
+        <Playground />
+      </Settings>
       <div className="mt-4 flex gap-4">
         <button
           onClick={onRandomize}

@@ -5,7 +5,10 @@ interface ThemeSelectorProps {
   onChange: (theme: string) => void;
 }
 
-export const ThemeSelector = ({ current, onChange }): ThemeSelectorProps => (
+export const ThemeSelector: React.FC<ThemeSelectorProps> = ({
+  current,
+  onChange,
+}) => (
   <div className="flex gap-2 mt-4">
     {["dreamy", "neutral", "cozy"].map((theme) => (
       <button

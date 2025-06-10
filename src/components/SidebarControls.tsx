@@ -10,7 +10,7 @@ interface Props {
   onGenerate: () => void;
 }
 
-export const SidebarControls = ({
+export const SidebarControls: React.FC<Props> = ({
   rssUrl,
   setRssUrl,
   width,
@@ -18,7 +18,7 @@ export const SidebarControls = ({
   height,
   setHeight,
   onGenerate,
-}): Props => (
+}) => (
   <div className="flex flex-col gap-4 w-64 p-4 border-r border-gray-200">
     <input
       type="text"
