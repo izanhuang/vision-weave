@@ -1,15 +1,15 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import PhotoAlbum from "react-photo-album";
 import "react-photo-album/styles.css";
 import { useSettings } from "../context/useSettings.tsx";
 
-export function Playground() {
+export const Playground = forwardRef<HTMLDivElement>((_, ref) => {
   const { photos, layout, columns, targetRowHeight, spacing, padding, width } =
     useSettings();
 
   return (
-    <Box sx={{ width: `${width}%`, mx: "auto" }}>
+    <Box sx={{ width: `${width}%`, mx: "auto" }} ref={ref}>
       <PhotoAlbum
         photos={photos}
         layout={layout}
@@ -36,4 +36,4 @@ export function Playground() {
       />
     </Box>
   );
-}
+});

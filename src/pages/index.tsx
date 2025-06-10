@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getPinterestImages } from "../lib/getPinterestImages.ts";
 import { SidebarControls } from "../components/SidebarControls.tsx";
 import { BoardCanvas } from "../components/BoardCanvas.tsx";
+
 export default function Home() {
   const [rssUrl, setRssUrl] = useState("");
   const [images, setImages] = useState<any[]>([]);

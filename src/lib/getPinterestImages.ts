@@ -20,6 +20,16 @@ function getImageDimensions(
   });
 }
 
+const proxyImage = (url: string) => {
+  if (process.env.NODE_ENV === "production") {
+    return `https://your-production-domain.com/image?url=${encodeURIComponent(
+      url
+    )}`;
+  }
+
+  return `http://localhost:4000/image?url=${encodeURIComponent(url)}`;
+};
+
 export async function getPinterestImages(rssUrl: string) {
   try {
     const baseUrl =
@@ -42,11 +52,13 @@ export async function getPinterestImages(rssUrl: string) {
 
         const imageDimensions = await getImageDimensions(imageUrl[1]);
 
+        const imageSrc = await proxyImage(imageUrl[1]);
+
         return {
           key: item.guid,
           width: imageDimensions.width,
           height: imageDimensions.height,
-          src: imageUrl ? imageUrl[1] : null,
+          src: imageSrc,
         } as Photo;
       })
     );
