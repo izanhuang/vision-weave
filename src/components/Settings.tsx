@@ -45,93 +45,109 @@ export default function Settings({ images, children }) {
           columns={24}
           rowSpacing={2}
           columnSpacing={4}
-          flexDirection={"column"}
+          // flexDirection={"column"}
         >
-          <Filter>
-            <TextField
-              select
-              fullWidth
-              label="Layout"
-              variant="standard"
-              margin="none"
-              value={layout}
-              onChange={(event) => setLayout(event.target.value as LayoutType)}
-            >
-              {[
-                { value: "rows", title: "Rows" },
-                { value: "columns", title: "Columns" },
-                { value: "masonry", title: "Masonry" },
-              ].map(({ value, title }) => (
-                <MenuItem key={value} value={value}>
-                  {title}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <TextField
+                select
+                fullWidth
+                label="Layout"
+                variant="standard"
+                margin="none"
+                value={layout}
+                onChange={(event) =>
+                  setLayout(event.target.value as LayoutType)
+                }
+              >
+                {[
+                  { value: "rows", title: "Rows" },
+                  { value: "columns", title: "Columns" },
+                  { value: "masonry", title: "Masonry" },
+                ].map(({ value, title }) => (
+                  <MenuItem key={value} value={value}>
+                    {title}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Photos"
-              min={1}
-              max={images.length}
-              value={count}
-              onChange={(_, value) => setCount(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Photos"
+                min={1}
+                max={images.length}
+                value={count}
+                onChange={(_, value) => setCount(value)}
+              />
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Spacing"
-              min={0}
-              max={50}
-              value={spacing}
-              onChange={(_, value) => setSpacing(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Spacing"
+                min={0}
+                max={50}
+                value={spacing}
+                onChange={(_, value) => setSpacing(value)}
+              />
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Padding"
-              min={0}
-              max={50}
-              value={padding}
-              onChange={(_, value) => setPadding(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Padding"
+                min={0}
+                max={50}
+                value={padding}
+                onChange={(_, value) => setPadding(value)}
+              />
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Row height"
-              min={50}
-              max={500}
-              step={5}
-              value={targetRowHeight}
-              disabled={layout !== "rows"}
-              onChange={(_, value) => setTargetRowHeight(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Row height"
+                min={50}
+                max={500}
+                step={5}
+                value={targetRowHeight}
+                disabled={layout !== "rows"}
+                onChange={(_, value) => setTargetRowHeight(value)}
+              />
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Columns"
-              min={1}
-              max={10}
-              value={columns}
-              disabled={layout === "rows"}
-              onChange={(_, value) => setColumns(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Columns"
+                min={1}
+                max={10}
+                value={columns}
+                disabled={layout === "rows"}
+                onChange={(_, value) => setColumns(value)}
+              />
+            </Filter>
+          </Grid>
 
-          <Filter>
-            <SliderControl
-              name="Width (%)"
-              min={10}
-              max={100}
-              step={5}
-              value={width}
-              onChange={(_, value) => setWidth(value)}
-            />
-          </Filter>
+          <Grid size={8}>
+            <Filter>
+              <SliderControl
+                name="Width (%)"
+                min={10}
+                max={100}
+                step={5}
+                value={width}
+                onChange={(_, value) => setWidth(value)}
+              />
+            </Filter>
+          </Grid>
         </Grid>
       </Paper>
 
