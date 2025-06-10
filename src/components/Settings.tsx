@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { Paper, Grid, TextField, MenuItem } from "@mui/material";
-import { LayoutType, Photo } from "react-photo-album";
+import { LayoutType } from "react-photo-album";
 import { SliderControl } from "./SliderControl.tsx";
 import { Filter } from "./Filter.tsx";
 import { SettingsContext } from "../context/useSettings.tsx";
@@ -34,19 +34,13 @@ export default function Settings({ images, children }) {
       padding,
       width,
     }),
-    [layout, count, targetRowHeight, columns, spacing, padding, width]
+    [images, layout, count, targetRowHeight, columns, spacing, padding, width]
   );
 
   return (
     <SettingsContext.Provider value={settings}>
       <Paper variant="outlined" sx={{ mb: 4, p: 2, textAlign: "left" }}>
-        <Grid
-          container
-          columns={24}
-          rowSpacing={2}
-          columnSpacing={4}
-          // flexDirection={"column"}
-        >
+        <Grid container columns={24} rowSpacing={2} columnSpacing={4}>
           <Grid size={8}>
             <Filter>
               <TextField
