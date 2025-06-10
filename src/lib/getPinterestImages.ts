@@ -4,17 +4,17 @@ import { Photo } from "react-photo-album";
 
 function getImageDimensions(
   imgUrl: string
-): Promise<{ width: string; height: string }> {
+): Promise<{ width: number; height: number }> {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
       resolve({
-        width: img.width ? `${img.width}px` : "auto",
-        height: img.height ? `${img.height}px` : "auto",
+        width: img.width,
+        height: img.height,
       });
     };
     img.onerror = () => {
-      resolve({ width: "100px", height: "100px" }); // Default dimensions on error
+      resolve({ width: 100, height: 100 }); // Default dimensions on error
     };
     img.src = imgUrl;
   });
@@ -33,13 +33,14 @@ export async function getPinterestImages(rssUrl: string) {
     const json = parser.parse(data);
     const items = json.rss.channel.item;
     const imageUrls = await Promise.all(
-      items.map(async (item): Promise<Photo> => {
+      items.map(async (item): Promise<Photo | null> => {
         const imageUrl = item.description.match(/<img src=\"([^\"]+)\"/);
-        const imageDimensions = imageUrl
-          ? await getImageDimensions(imageUrl[1])
-          : { width: 100, height: 100 }; // Default dimensions if no image found
+        if (imageUrl === null) {
+          console.warn("No image found in item:", item);
+          return null; // Skip items without images
+        }
 
-        console.log("Parsed image:", imageDimensions);
+        const imageDimensions = await getImageDimensions(imageUrl[1]);
 
         return {
           key: item.guid,
