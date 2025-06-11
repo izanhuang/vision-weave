@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# 🌟 Vision Weave
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Vision Weave** is a modern tool that transforms Pinterest boards into aesthetic, downloadable vision boards — perfect for visual goal-setting, mood tracking, or creative inspiration.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- 🔗 Convert Pinterest boards via RSS feed
+- 🎨 Customize board layout, size, spacing, and style
+- 💾 Download as high-quality PNG images
+- 📱 Mobile-friendly and responsive design
+- 🚫 CORS-safe proxy backend to handle Pinterest image fetching
+- 💡 Built with React, Next.js, TypeScript, Tailwind CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📸 Preview
 
-### `npm test`
+> _Live demo coming soon_  
+> _Include GIF or screenshot here_
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/yourusername/vision-weave.git
+cd vision-weave
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+### 2. Install Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3. Start Development Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run start
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a .env.local file and add any necessary variables:
 
-### Code Splitting
+```bash
+REACT_APP_API_URL=http://localhost:4000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🛠️ Tech Stack
 
-### Making a Progressive Web App
+- Frontend: React, Next.js, TypeScript, Tailwind CSS
+- Backend: Next.js API routes with CORS-safe image proxying
+- Image Processing: html-to-image
+- RSS Parsing: Custom RSS fetch + image parser
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🤔 Why Vision Weave?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Vision boards are powerful for visualizing goals, but existing tools are either too clunky or not personalized. Vision Weave bridges aesthetics and functionality, offering a tool that is easy to use and truly inspiring.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🙋‍♀️ Author
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with ☕ by Izan Huang
