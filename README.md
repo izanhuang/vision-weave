@@ -12,6 +12,7 @@
 - 💡 Built with React, Next.js, TypeScript, Tailwind CSS
 
 ## 📸 Preview
+https://github.com/user-attachments/assets/e8ffebd8-68e4-422b-bffd-cefa354a1681
 
 ## 🚀 Getting Started
 
