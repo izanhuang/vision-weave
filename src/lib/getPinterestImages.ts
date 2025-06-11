@@ -21,7 +21,7 @@ function getImageDimensions(
 }
 
 const proxyImage = (url: string) => {
-  return `${process.env.REACT_APP_API_URL}/image?url=${encodeURIComponent(
+  return `${process.env.REACT_APP_API_URL}/api/image?url=${encodeURIComponent(
     url
   )}`;
 };
