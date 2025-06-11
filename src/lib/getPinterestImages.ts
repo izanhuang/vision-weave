@@ -21,13 +21,9 @@ function getImageDimensions(
 }
 
 const proxyImage = (url: string) => {
-  if (process.env.NODE_ENV === "production") {
-    return `https://your-production-domain.com/image?url=${encodeURIComponent(
-      url
-    )}`;
-  }
-
-  return `http://localhost:4000/image?url=${encodeURIComponent(url)}`;
+  return `${process.env.REACT_APP_API_URL}/image?url=${encodeURIComponent(
+    url
+  )}`;
 };
 
 const getBase64FromUrl = async (url) => {
@@ -45,12 +41,9 @@ const getBase64FromUrl = async (url) => {
 
 export async function getPinterestImages(rssUrl: string) {
   try {
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? "https://your-production-domain.com" // e.g. yourdomain.com or backend server
-        : "http://localhost:4000";
-
-    const proxyUrl = `${baseUrl}/api/rss?url=${encodeURIComponent(rssUrl)}`;
+    const proxyUrl = `${
+      process.env.REACT_APP_API_URL
+    }/api/rss?url=${encodeURIComponent(rssUrl)}`;
     const { data } = await axios.get(proxyUrl);
     const parser = new XMLParser();
     const json = parser.parse(data);

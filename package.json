@@ -12,6 +12,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.9.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "env-cmd": "^10.1.0",
     "express": "^5.1.0",
     "fast-xml-parser": "^5.2.5",
     "html-to-image": "^1.11.13",
@@ -23,7 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run react\" \"npm run server\"",
+    "start": "env-cmd -f .env.local concurrently \"npm run react\" \"npm run server\"",
+    "start:prod": "env-cmd -f .env.production react-scripts start",
     "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
