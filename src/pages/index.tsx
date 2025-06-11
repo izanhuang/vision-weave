@@ -11,7 +11,6 @@ export default function Home() {
 
   const generateBoard = async () => {
     const result = await getPinterestImages(rssUrl);
-    console.log(result);
     setImages(result);
   };
 

@@ -30,58 +30,51 @@ const proxyImage = (url: string) => {
   return `http://localhost:4000/image?url=${encodeURIComponent(url)}`;
 };
 
+const getBase64FromUrl = async (url) => {
+  const imageData = await fetch(url);
+  const blob = await imageData.blob();
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      resolve(base64data);
+    };
+  });
+};
+
 export async function getPinterestImages(rssUrl: string) {
   try {
-    const { data } = await axios.get(rssUrl);
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://your-production-domain.com" // e.g. yourdomain.com or backend server
+        : "http://localhost:4000";
+
+    const proxyUrl = `${baseUrl}/api/rss?url=${encodeURIComponent(rssUrl)}`;
+    const { data } = await axios.get(proxyUrl);
     const parser = new XMLParser();
     const json = parser.parse(data);
     const items = json.rss.channel.item;
-    const images = items.map((item) => {
-      const imageUrl = item.description.match(/<img src=\"([^\"]+)\"/);
+    const imageUrls = await Promise.all(
+      items.map(async (item): Promise<Photo | null> => {
+        const imageUrl = item.description.match(/<img src=\"([^\"]+)\"/);
+        if (imageUrl === null) {
+          console.warn("No image found in item:", item);
+          return null; // Skip items without images
+        }
 
-      if (imageUrl === null) {
-        console.warn("No image found in item:", item);
-        return null; // Skip items without images
-      }
-      // Use the proxy to fetch the image
+        const imageDimensions = await getImageDimensions(imageUrl[1]);
+        const imageSrcProxy = await proxyImage(imageUrl[1]);
+        const imageBase64 = await getBase64FromUrl(imageSrcProxy);
 
-      return {
-        src: imageUrl[1],
-        width: 400,
-        height: 400,
-      };
-    });
-    return images.filter(Boolean);
-    // const baseUrl =
-    //   process.env.NODE_ENV === "production"
-    //     ? "https://your-production-domain.com" // e.g. yourdomain.com or backend server
-    //     : "http://localhost:4000";
-
-    // const proxyUrl = `${baseUrl}/api/rss?url=${encodeURIComponent(rssUrl)}`;
-    // const { data } = await axios.get(proxyUrl);
-    // const parser = new XMLParser();
-    // const json = parser.parse(data);
-    // const items = json.rss.channel.item;
-    // const imageUrls = await Promise.all(
-    //   items.map(async (item): Promise<Photo | null> => {
-    //     const imageUrl = item.description.match(/<img src=\"([^\"]+)\"/);
-    //     if (imageUrl === null) {
-    //       console.warn("No image found in item:", item);
-    //       return null; // Skip items without images
-    //     }
-
-    //     const imageDimensions = await getImageDimensions(imageUrl[1]);
-
-    //     const imageSrc = await proxyImage(imageUrl[1]);
-
-    //     return {
-    //       width: imageDimensions.width,
-    //       height: imageDimensions.height,
-    //       src: imageSrc,
-    //     } as Photo;
-    //   })
-    // );
-    // return imageUrls.filter(Boolean);
+        return {
+          width: imageDimensions.width,
+          height: imageDimensions.height,
+          src: imageBase64,
+        } as Photo;
+      })
+    );
+    return imageUrls.filter(Boolean);
   } catch (err) {
     console.error("RSS parse error:", err);
     return [];

@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import "react-photo-album/masonry.css";
 import Settings from "./Settings.tsx";
 import { Playground } from "./Playground.tsx";
-import { toJpeg, toPng } from "html-to-image";
+import { toPng } from "html-to-image";
 import { Photo } from "react-photo-album";
 
 interface BoardCanvasProps {
@@ -12,12 +12,12 @@ interface BoardCanvasProps {
 export const BoardCanvas = ({ images }: BoardCanvasProps) => {
   const boardRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = useCallback(() => {
+  const handleDownload = useCallback(async () => {
     if (boardRef.current === null) {
       return;
     }
 
-    toJpeg(boardRef.current)
+    toPng(boardRef.current)
       .then((dataUrl) => {
         const link = document.createElement("a");
         link.download = "vision-board.png";
